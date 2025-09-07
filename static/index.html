@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moana Alive - Animação de Fotos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">🎬 Moana Alive</h1>
+        
+        <ul class="nav nav-tabs" id="mainTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="video-tab" data-bs-toggle="tab" data-bs-target="#video" type="button">
+                    📸 Animar Foto
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="audio-tab" data-bs-toggle="tab" data-bs-target="#audio" type="button">
+                    🎤 Gerar Áudio
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lipsync-tab" data-bs-toggle="tab" data-bs-target="#lipsync" type="button">
+                    💋 Lip Sync
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="synced-tab" data-bs-toggle="tab" data-bs-target="#synced" type="button">
+                    🎬 Sincronizados
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-4" id="mainTabContent">
+            <!-- Aba Animar Foto -->
+            <div class="tab-pane fade show active" id="video">
+                <div class="card">
+                    <div class="card-body">
+                        <form id="videoForm" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label class="form-label">Escolha uma foto:</label>
+                                <div class="d-flex gap-2 mb-2 flex-wrap">
+                                    <button type="button" class="btn btn-outline-primary btn-sm" id="cameraBtn">
+                                        📷 Usar Câmera
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" id="fileBtn">
+                                        📁 Escolher Arquivo
+                                    </button>
+                                    <button type="button" class="btn btn-outline-info btn-sm" id="testCameraBtn" style="display: none;">
+                                        🔍 Testar Câmera
+                                    </button>
+                                </div>
+                                
+                                <!-- Aviso sobre HTTPS -->
+                                <div id="httpsWarning" class="alert alert-warning alert-sm" style="display: none;">
+                                    <small>
+                                        ⚠️ <strong>Câmera indisponível:</strong> Para usar a câmera, acesse via HTTPS ou localhost. 
+                                        <br>
+                                        💡 <strong>Como resolver:</strong> Execute <code>python run.py</code> e acesse <code>http://localhost:8000</code>
+                                    </small>
+                                </div>
+                                
+                                <!-- Camera capture area -->
+                                <div id="cameraArea" class="camera-area" style="display: none;">
+                                    <video id="cameraVideo" class="camera-video" autoplay></video>
+                                    <canvas id="cameraCanvas" style="display: none;"></canvas>
+                                    <div class="camera-controls mt-2">
+                                        <button type="button" class="btn btn-success btn-sm" id="captureBtn">
+                                            📸 Capturar Foto
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-sm" id="stopCameraBtn">
+                                            ❌ Fechar Câmera
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- File input -->
+                                <input type="file" class="form-control" name="file" id="fileInput" accept="image/*" style="display: none;">
+                                
+                                <!-- Preview area -->
+                                <div id="imagePreview" class="image-preview mt-2" style="display: none;">
+                                    <img id="previewImg" class="preview-image">
+                                    <button type="button" class="btn btn-sm btn-outline-danger mt-1" id="removeImageBtn">
+                                        🗑️ Remover
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Prompt para animação:</label>
+                                <input type="text" class="form-control" name="prompt" 
+                                       placeholder="Ex: A person waving hands to the camera" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Duração do vídeo:</label>
+                                <select class="form-control" name="duration" required>
+                                    <option value="6">6 segundos</option>
+                                    <option value="10">10 segundos</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">🎬 Gerar Vídeo</button>
+                        </form>
+                        <div id="videoResult" class="mt-3"></div>
+                        
+                        <hr class="my-6">
+                        
+                        <h5>📽️ Vídeos Gerados</h5>
+                        <div id="videoGallery" class="row">
+                            <div class="col-12 text-center text-muted">
+                                Carregando galeria...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aba Gerar Áudio -->
+            <div class="tab-pane fade" id="audio">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Gerar Áudio com IA</h5>
+                        <form id="audioForm">
+                            <div class="mb-3">
+                                <label class="form-label">Texto para falar:</label>
+                                <textarea class="form-control" name="text" rows="3" 
+                                          placeholder="Digite o texto que deseja transformar em voz" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Voz:</label>
+                                <select class="form-control" name="voice_id">
+                                    <option value="Lively_Girl">Menina Animada</option>
+                                    <option value="Warm_Male">Homem Caloroso</option>
+                                    <option value="Gentle_Female">Mulher Gentil</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success">🎤 Gerar Áudio</button>
+                        </form>
+                        <div id="audioResult" class="mt-3"></div>
+                        
+                        <hr class="my-4">
+                        
+                        <h5>🎵 Áudios Gerados</h5>
+                        <div id="audioGallery" class="row">
+                            <div class="col-12 text-center text-muted">
+                                Carregando áudios...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aba Lip Sync -->
+            <div class="tab-pane fade" id="lipsync">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Sincronizar Labial</h5>
+                        <form id="lipsyncForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>📹 Selecione um Vídeo:</h6>
+                                    <div id="videoSelector" class="video-selector mb-3">
+                                        <div class="text-center text-muted">Carregando vídeos...</div>
+                                    </div>
+                                    <input type="hidden" name="video_path" id="selectedVideoPath" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>🎤 Selecione um Áudio:</h6>
+                                    <div id="audioSelector" class="audio-selector mb-3">
+                                        <div class="text-center text-muted">Carregando áudios...</div>
+                                    </div>
+                                    <input type="hidden" name="audio_path" id="selectedAudioPath" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-warning">💋 Sincronizar</button>
+                        </form>
+                        <div id="lipsyncResult" class="mt-3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aba Vídeos Sincronizados -->
+            <div class="tab-pane fade" id="synced">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>🎬 Vídeos Sincronizados</h5>
+                        <p class="text-muted">Todos os vídeos com lip sync já processados</p>
+                        
+                        <div id="syncedGallery" class="row">
+                            <div class="col-12 text-center text-muted">
+                                Carregando vídeos sincronizados...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "a16befa3-77d9-404a-ae38-49eafa45e780",
+    "video_path": "final_videos/a16befa3-77d9-404a-ae38-49eafa45e780_lipsync.mp4",
+    "original_video_path": "generated_videos/90695451-2de7-4aaa-8e01-9b34808deb58.mp4",
+    "original_audio_path": "generated_audios/677e6686-ba65-42b0-bf83-b4fcf56e86a8.wav",
+    "video_prompt": "A boneca balança a mão para a câmera, mexe a cabeça. Sentada.",
+    "audio_text": "Oi, Olívia, tudo bem? Me faz um favor? ... Quero que você lave a louça para mim!",
+    "original_filename": "barbie.jpeg",
+    "created_at": "2025-09-05T13:36:38.905630"
+  },
+  {
+    "id": "74f7f09e-c353-4e75-8db2-1ac4351a5a6b",
+    "video_path": "final_videos/74f7f09e-c353-4e75-8db2-1ac4351a5a6b_lipsync.mp4",
+    "original_video_path": "generated_videos/209a97e4-bfc8-4745-a3ce-36889a3c0495.mp4",
+    "original_audio_path": "generated_audios/56f536f1-36c1-4d74-bc67-e6889e1a16b9.wav",
+    "video_prompt": "A boneca balança a mão para a câmera, mexe a cabeça. Sentada.",
+    "audio_text": "Oi, Olívia, tudo bem? É hora de lavar a louça!",
+    "original_filename": "moana.jpeg",
+    "created_at": "2025-09-05T13:46:05.165305"
+  },
+  {
+    "id": "fa34befb-7c25-483c-bbd5-be0618bed936",
+    "video_path": "final_videos/fa34befb-7c25-483c-bbd5-be0618bed936_lipsync.mp4",
+    "original_video_path": "generated_videos/209a97e4-bfc8-4745-a3ce-36889a3c0495.mp4",
+    "original_audio_path": "generated_audios/1f431346-307d-4d1d-90ec-d75ab8139911.wav",
+    "video_prompt": "A boneca balança a mão para a câmera, mexe a cabeça. Sentada.",
+    "audio_text": "Oi, Olívia! Você pode lavar a louça para mim?",
+    "original_filename": "moana.jpeg",
+    "created_at": "2025-09-05T13:59:36.341566"
+  }
+]

@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+.env
+env.example
+
+# Arquivos temporários
+uploads/
+*.log
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos gerados pelo app (opcional - remova se quiser versionar)
+# generated_videos/
+# generated_audios/
+# final_videos/
