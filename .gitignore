@@ -8,7 +8,6 @@ env/
 venv/
 .venv
 .env
-env.example
 
 # Arquivos temporários
 uploads/

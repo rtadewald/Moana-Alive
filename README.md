@@ -16,22 +16,41 @@ git clone https://github.com/seu-usuario/moana-alive.git
 cd moana-alive
 ```
 
-### 2. Configure o ambiente
+### 2. Obtenha sua chave API do Fal AI
+1. **Acesse**: [fal.ai](https://fal.ai)
+2. **Crie uma conta** gratuita
+3. **Vá para**: Dashboard → API Keys
+4. **Crie uma nova chave** e copie o valor
+
+### 3. Configure as variáveis de ambiente
 ```bash
 # Instale dependências
 pip install -r requirements.txt
 
-# Configure a chave API
-export FAL_KEY=sua_chave_fal_aqui
-# Ou crie arquivo .env com: FAL_KEY=sua_chave_fal_aqui
+# Crie arquivo .env na raiz do projeto
+echo "FAL_KEY=sua_chave_fal_aqui" > .env
+
+# ⚠️ IMPORTANTE: Substitua "sua_chave_fal_aqui" pela chave real do Fal AI
 ```
 
-### 3. Execute o projeto
+**Exemplo do arquivo `.env`:**
+```env
+# Configuração da API Fal AI
+# Obtenha sua chave em: https://fal.ai/dashboard/keys
+FAL_KEY=fal_c1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6
+
+# Configuração do servidor (opcional)
+PORT=8000
+```
+
+> 📝 **Nota**: O arquivo `.env` deve ficar na **raiz do projeto** (mesmo diretório que `app.py`)
+
+### 4. Execute o projeto
 ```bash
 python run.py
 ```
 
-### 4. Acesse a aplicação
+### 5. Acesse a aplicação
 Abra no navegador: `http://localhost:8000`
 
 > ⚠️ **Para usar câmera**: Acesse via `localhost`, não `127.0.0.1`
@@ -44,3 +63,21 @@ Abra no navegador: `http://localhost:8000`
 - **Áudio**: PyDub para processamento
 - **Deploy**: Render (produção)
 
+## 🔧 Problemas Comuns
+
+### ❌ "Erro: Chave API não encontrada"
+- **Solução**: Verifique se o arquivo `.env` existe e tem a chave correta
+- **Comando**: `cat .env` para verificar o conteúdo
+
+### ❌ "Câmera não funciona no celular"  
+- **Solução**: Use o botão "📱 Câmera Celular" em vez de "📷 Câmera Web"
+- **Requisito**: Acesso via HTTPS (deploy em produção)
+
+### ❌ "ModuleNotFoundError"
+- **Solução**: Instale as dependências: `pip install -r requirements.txt`
+
+## 🆘 Suporte
+
+- **Issues**: Reporte bugs no GitHub
+- **API Fal**: [Documentação oficial](https://fal.ai/docs)
+- **Deploy**: Guia do [Render.com](https://render.com/docs)
