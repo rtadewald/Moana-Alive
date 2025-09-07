@@ -124,14 +124,14 @@ async def generate_video(file: UploadFile = File(...), prompt: str = Form(...), 
 
 
 @app.post("/generate-audio")
-async def generate_audio(text: str = Form(...), voice_id: str = Form("Lively_Girl")):
+async def generate_audio(text: str = Form(...), voice_id: str = Form("Lively_Girl"), speed: float = Form(1.0)):
     try:
         result = fal_client.subscribe(
             "fal-ai/minimax/speech-02-turbo",
             arguments={
                 "text": text,
                 "voice_setting": {
-                    "speed": 1,
+                    "speed": speed,
                     "vol": 1,
                     "voice_id": voice_id,
                     "pitch": 0,

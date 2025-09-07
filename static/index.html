@@ -138,6 +138,15 @@
                                     <option value="Sweet_Girl_2">Menina Doce</option>
                                 </select>
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label">Velocidade da Fala: <span id="speedValue">1.0x</span></label>
+                                <input type="range" class="form-range" name="speed" id="speedSlider" 
+                                       min="0.5" max="2.0" step="0.1" value="1.0">
+                                <div class="d-flex justify-content-between">
+                                    <small class="text-muted">0.5x (Lenta)</small>
+                                    <small class="text-muted">2.0x (Rápida)</small>
+                                </div>
+                            </div>
                             <button type="submit" class="btn btn-success">🎤 Gerar Áudio</button>
                         </form>
                         <div id="audioResult" class="mt-3"></div>

@@ -19,5 +19,26 @@
     "text": "Oi, Olívia! Você pode lavar a louça para mim?",
     "voice_id": "Lively_Girl",
     "created_at": "2025-09-05T13:57:43.818359"
+  },
+  {
+    "id": "7be5f2fe-bfdf-4432-ae41-482d42d48c17",
+    "audio_path": "generated_audios/7be5f2fe-bfdf-4432-ae41-482d42d48c17.wav",
+    "text": "Oi, Olívia! Você pode guardar seus brinquedos para mim?",
+    "voice_id": "Lovely_Girl",
+    "created_at": "2025-09-07T09:56:29.265890"
+  },
+  {
+    "id": "cb5a2688-5354-4d44-89a5-7fb1970c15a6",
+    "audio_path": "generated_audios/cb5a2688-5354-4d44-89a5-7fb1970c15a6.wav",
+    "text": "Oi, Olívia! Você pode guardar seus brinquedos para mim?",
+    "voice_id": "Lovely_Girl",
+    "created_at": "2025-09-07T09:56:48.996302"
+  },
+  {
+    "id": "8996c5bf-f4f4-4f88-9d99-6589d1a1f895",
+    "audio_path": "generated_audios/8996c5bf-f4f4-4f88-9d99-6589d1a1f895.wav",
+    "text": "Oi, Olívia! Você pode guardar seus brinquedos para mim?",
+    "voice_id": "Lovely_Girl",
+    "created_at": "2025-09-07T09:57:05.848625"
   }
 ]

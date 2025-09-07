@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadSyncedGallery();
     
     initCameraControls();
+    initSpeedSlider();
     
     document.getElementById('videoForm').addEventListener('submit', handleVideoSubmit);
     document.getElementById('audioForm').addEventListener('submit', handleAudioSubmit);
@@ -644,4 +645,15 @@ function stopCamera() {
         cameraStream = null;
     }
     document.getElementById('cameraArea').style.display = 'none';
+}
+
+function initSpeedSlider() {
+    const speedSlider = document.getElementById('speedSlider');
+    const speedValue = document.getElementById('speedValue');
+    
+    if (speedSlider && speedValue) {
+        speedSlider.addEventListener('input', function() {
+            speedValue.textContent = this.value + 'x';
+        });
+    }
 }
