@@ -1,37 +1,8 @@
 # 🎬 Moana Alive
 
-**Dê vida aos brinquedos das crianças!** Uma aplicação web que transforma fotos de brinquedos em vídeos falantes usando IA.
+**Dê vida aos brinquedos das crianças!** Uma aplicação web que transforma fotos de brinquedos em vídeos falantes usando IA. Ele utiliza o modelo minimax/hailuo-02-fast/image-to-video para transformar uma foto em um vídeo, minimax/speech-02-turbo para gerar um audio e latentsync para lipsync.
 
-## ✨ O que faz?
 
-- **📸 Anima fotos** de brinquedos usando modelos de image-to-video
-- **🎤 Gera áudios** com texto-para-fala em português
-- **💋 Sincroniza lábios** para criar vídeos realistas falantes
-- **📱 Interface simples** para crianças e pais usarem
-
-## 🎯 Funcionalidades
-
-### 📸 **Animar Foto**
-- Upload de foto ou captura com câmera web
-- Prompt personalizado para animação
-- Duração configurável (6-10 segundos)
-- Galeria de vídeos gerados
-
-### 🎤 **Gerar Áudio**
-- Texto-para-fala em português brasileiro
-- Múltiplas vozes disponíveis
-- Áudio estendido com silêncio automático
-- Biblioteca de áudios criados
-
-### 💋 **Lip Sync**
-- Combinação visual de vídeo + áudio
-- Seleção interativa com prévias
-- Sincronização labial inteligente
-
-### 🎬 **Vídeos Sincronizados**
-- Galeria de resultados finais
-- Informações completas dos projetos
-- Sistema de organização
 
 ## 🚀 Instalação e Execução
 
@@ -73,59 +44,3 @@ Abra no navegador: `http://localhost:8000`
 - **Áudio**: PyDub para processamento
 - **Deploy**: Render (produção)
 
-## 📁 Estrutura do Projeto
-
-```
-moana-alive/
-├── app.py              # Backend FastAPI
-├── run.py              # Script de execução
-├── requirements.txt    # Dependências
-├── build.sh           # Script de deploy
-├── static/            # Frontend
-│   ├── index.html     # Interface principal
-│   ├── script.js      # Funcionalidades
-│   └── style.css      # Estilos
-├── assets/            # Arquivos de exemplo
-├── generated_videos/  # Vídeos criados
-├── generated_audios/  # Áudios gerados
-└── final_videos/      # Resultados finais
-```
-
-## 🎮 Como Usar
-
-1. **📸 Tire ou envie** uma foto do brinquedo
-2. **✍️ Escreva** o que quer que ele fale
-3. **⚙️ Configure** duração e voz
-4. **🎬 Gere** o vídeo animado
-5. **🎤 Crie** o áudio com a fala
-6. **💋 Combine** tudo no lip sync
-7. **🎉 Divirta-se** com o resultado!
-
-## 🌟 Exemplos de Uso
-
-- **Bonecas falantes** para histórias
-- **Brinquedos educativos** com lições
-- **Personagens** de contos infantis
-- **Presentes personalizados** para crianças
-
-## 🤝 Contribuindo
-
-1. Fork o projeto
-2. Crie uma branch: `git checkout -b minha-feature`
-3. Commit mudanças: `git commit -m 'Nova feature'`
-4. Push para branch: `git push origin minha-feature`
-5. Abra um Pull Request
-
-## 📄 Licença
-
-Este projeto está sob licença MIT. Veja o arquivo [LICENSE](LICENSE) para detalhes.
-
-## 🆘 Suporte
-
-- **Issues**: Reporte bugs no GitHub
-- **Documentação**: Veja os comentários no código
-- **Deploy**: Siga o guia do Render.com
-
----
-
-**Feito com ❤️ para trazer magia aos brinquedos das crianças!** ✨
