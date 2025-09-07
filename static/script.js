@@ -55,8 +55,10 @@ async function handleVideoSubmit(e) {
             // Limpar preview após sucesso
             document.getElementById('imagePreview').style.display = 'none';
             document.getElementById('fileInput').value = '';
+            document.getElementById('mobileCameraInput').value = '';
             capturedImageFile = null;
             document.getElementById('cameraBtn').classList.remove('active');
+            document.getElementById('mobileCameraBtn').classList.remove('active');
             document.getElementById('fileBtn').classList.remove('active');
         } else {
             resultDiv.innerHTML = `<div class="alert alert-danger">❌ Erro: ${result.error}</div>`;
@@ -445,9 +447,10 @@ async function deleteSyncedVideo(syncedId) {
 
 function initCameraControls() {
     const cameraBtn = document.getElementById('cameraBtn');
+    const mobileCameraBtn = document.getElementById('mobileCameraBtn');
     const fileBtn = document.getElementById('fileBtn');
-    const testCameraBtn = document.getElementById('testCameraBtn');
     const fileInput = document.getElementById('fileInput');
+    const mobileCameraInput = document.getElementById('mobileCameraInput');
     const cameraArea = document.getElementById('cameraArea');
     const cameraVideo = document.getElementById('cameraVideo');
     const captureBtn = document.getElementById('captureBtn');
@@ -472,58 +475,27 @@ function initCameraControls() {
     // Verificar se câmera está disponível - versão simplificada
     const hasMediaDevices = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
     
+    // Detectar se é dispositivo móvel
+    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Configurar visibilidade dos botões baseado no dispositivo
+    if (isMobile) {
+        // Em mobile, priorizar câmera nativa
+        mobileCameraBtn.classList.remove('btn-outline-success');
+        mobileCameraBtn.classList.add('btn-success');
+        mobileCameraBtn.innerHTML = '📱 Usar Câmera';
+    }
+    
     if (!hasMediaDevices) {
         cameraBtn.disabled = true;
-        cameraBtn.innerHTML = '📷 Câmera Indisponível';
-        testCameraBtn.style.display = 'inline-block';
+        cameraBtn.innerHTML = '📷 Indisponível';
+        cameraBtn.title = 'Câmera web não disponível. Use "📱 Câmera Celular" em dispositivos móveis.';
         
-        let warningMsg = '';
-        if (!navigator.mediaDevices) {
-            if (location.hostname !== 'localhost') {
-                warningMsg = `⚠️ Acesse via http://localhost:8000 para usar câmera (atual: ${location.hostname})`;
-            } else {
-                warningMsg = 'API de câmera não suportada neste navegador';
-            }
-        } else {
-            warningMsg = 'getUserMedia não disponível';
+        if (!isMobile) {
+            document.getElementById('httpsWarning').style.display = 'block';
+            document.querySelector('#httpsWarning small').innerHTML = 
+                `⚠️ <strong>Câmera web indisponível.</strong> Em dispositivos móveis, use o botão "📱 Câmera Celular".`;
         }
-        
-        cameraBtn.title = warningMsg;
-        document.getElementById('httpsWarning').style.display = 'block';
-        document.querySelector('#httpsWarning small').innerHTML = 
-            `⚠️ <strong>Câmera indisponível:</strong> ${warningMsg}`;
-        
-        // Botão de teste forçado
-        testCameraBtn.addEventListener('click', async function() {
-            try {
-                const stream = await safeGetUserMedia({ video: true });
-                alert('✅ Câmera funcionando! Pode ativar o botão principal.');
-                cameraBtn.disabled = false;
-                cameraBtn.innerHTML = '📷 Usar Câmera';
-                testCameraBtn.style.display = 'none';
-                document.getElementById('httpsWarning').style.display = 'none';
-                stream.getTracks().forEach(track => track.stop());
-                
-                // Recriar o event listener para o botão principal
-                cameraBtn.removeEventListener('click', () => {});
-                cameraBtn.addEventListener('click', handleCameraClick);
-                
-            } catch (error) {
-                let msg = 'Erro desconhecido';
-                if (error.message.includes('not available')) {
-                    msg = 'API de câmera não disponível. Acesse via HTTPS ou localhost.';
-                } else if (error.name === 'NotAllowedError') {
-                    msg = 'Permissão de câmera negada.';
-                } else if (error.name === 'NotFoundError') {
-                    msg = 'Nenhuma câmera encontrada.';
-                } else {
-                    msg = error.message;
-                }
-                alert('❌ ' + msg);
-            }
-        });
-        
-        return;
     }
 
     // Função para lidar com clique na câmera
@@ -571,8 +543,35 @@ function initCameraControls() {
         }
     }
 
-    // Botão da câmera
+    // Botão da câmera web
     cameraBtn.addEventListener('click', handleCameraClick);
+    
+    // Botão da câmera móvel
+    mobileCameraBtn.addEventListener('click', function() {
+        stopCamera();
+        cameraArea.style.display = 'none';
+        imagePreview.style.display = 'none';
+        
+        mobileCameraBtn.classList.add('active');
+        cameraBtn.classList.remove('active');
+        fileBtn.classList.remove('active');
+        
+        mobileCameraInput.click();
+    });
+    
+    // Input da câmera móvel
+    mobileCameraInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            capturedImageFile = file; // Usar a foto da câmera móvel
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                imagePreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
     
     // Botão de arquivo
     fileBtn.addEventListener('click', function() {
@@ -582,6 +581,7 @@ function initCameraControls() {
         
         fileBtn.classList.add('active');
         cameraBtn.classList.remove('active');
+        mobileCameraBtn.classList.remove('active');
         
         fileInput.click();
     });
@@ -630,8 +630,10 @@ function initCameraControls() {
     removeImageBtn.addEventListener('click', function() {
         imagePreview.style.display = 'none';
         fileInput.value = '';
+        mobileCameraInput.value = '';
         capturedImageFile = null;
         cameraBtn.classList.remove('active');
+        mobileCameraBtn.classList.remove('active');
         fileBtn.classList.remove('active');
     });
 }

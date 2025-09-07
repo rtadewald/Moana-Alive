@@ -44,13 +44,13 @@
                                 <label class="form-label">Escolha uma foto:</label>
                                 <div class="d-flex gap-2 mb-2 flex-wrap">
                                     <button type="button" class="btn btn-outline-primary btn-sm" id="cameraBtn">
-                                        📷 Usar Câmera
+                                        📷 Câmera Web
+                                    </button>
+                                    <button type="button" class="btn btn-outline-success btn-sm" id="mobileCameraBtn">
+                                        📱 Câmera Celular
                                     </button>
                                     <button type="button" class="btn btn-outline-secondary btn-sm" id="fileBtn">
                                         📁 Escolher Arquivo
-                                    </button>
-                                    <button type="button" class="btn btn-outline-info btn-sm" id="testCameraBtn" style="display: none;">
-                                        🔍 Testar Câmera
                                     </button>
                                 </div>
                                 
@@ -79,6 +79,9 @@
                                 
                                 <!-- File input -->
                                 <input type="file" class="form-control" name="file" id="fileInput" accept="image/*" style="display: none;">
+                                
+                                <!-- Mobile camera input -->
+                                <input type="file" class="form-control" id="mobileCameraInput" accept="image/*" capture="environment" style="display: none;">
                                 
                                 <!-- Preview area -->
                                 <div id="imagePreview" class="image-preview mt-2" style="display: none;">

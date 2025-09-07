@@ -157,7 +157,14 @@ hr {
     }
     
     .d-flex.gap-2 {
-        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .d-flex.gap-2 .btn {
+        flex: 1;
+        min-width: 120px;
+        margin: 2px;
     }
     
     .camera-controls {
